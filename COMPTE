@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Connexion</title>
+	<head>
+	<body>
+		<h1>Bases de donn�es MySQL</h1>  
+        <?php
+            $servername = 'localhost';
+            $username = 'root';
+            $password = '';
+			$dbname = 'vvalucasc';
+            
+            //On �tablit la connexion
+            $conn = new mysqli($servername, $username, $password,$dbname);
+            
+            //On v�rifie la connexion
+            if($conn->connect_error){
+                die('Erreur : ' .$conn->connect_error);
+            }
+            echo 'Connexion r�ussie';
+     ?>
+		
+		
+		<?php
+		
+		$res = mysqli_query($conn, "SELECT USER,MDP,NOMCOMPTE,PRENOMCOMPTE,DATEINSCRIP,DATEFERME,TYPEPROFIL,DATEDEBSEJOUR,DATEFINSEJOUR,DATENAISCOMPTE,ADRMAILCOMPTE,NOTELCOMPTE FROM COMPTE") ;
+		
+
+			
+		?>
+		
+		<table border="2" style="width:100%" cellspacing='5'>
+
+  <tr>
+    <td>UTILISATEUR</td>
+    <td>MOT DE PASSE</td>
+    <td>COMPTE</td>
+	<td>PRENOM</td>
+	<td>DATE INSCRIPTION</td>
+	<td>DATE DE FERMETURE</td>
+	<td>PROFIL</td>
+	<td>DATE DEBUT SEJOUR</td>
+	<td>DATE FIN SEJOUR</td>
+	<td>DATE DE NAISSANCE</td>
+	<td>ADRESSE ELECTRONIQUE</td>
+	<td>NO TELEPHONE</td>
+  </tr>
+<?php while ($ligne = mysqli_fetch_array($res)){ ?>
+
+			<tr>
+				<td><?php echo $ligne['USER'];?></td>
+				<td><?php echo $ligne['MDP'];?></td>
+				<td><?php echo $ligne['NOMCOMPTE'];?></td>
+				<td><?php echo $ligne['PRENOMCOMPTE'];?></td>
+				<td><?php echo $ligne['DATEINSCRIP'];?></td>
+				<td><?php echo $ligne['DATEFERME'];?></td>
+				<td><?php echo $ligne['TYPEPROFIL'];?></td>
+				<td><?php echo $ligne['DATEDEBSEJOUR'];?></td>
+				<td><?php echo $ligne['DATEFINSEJOUR'];?></td>
+				<td><?php echo $ligne['DATENAISCOMPTE'];?></td>
+				<td><?php echo $ligne['ADRMAILCOMPTE'];?></td>
+				<td><?php echo $ligne['NOTELCOMPTE'];?></td>
+			</tr>
+
+		
+<?php } ?>
+				</table>
+				
+   
+		</body>
+	
+</html>
