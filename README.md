@@ -1,2 +1,0 @@
-# Projets
-Projets-Lucas-Constant
