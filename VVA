@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html>
 
+	<head>
+		<meta charset="utf-8">
+		<title>Connexion</title>
+	<head>
+	<body>
+		<h1>Bases de données MySQL</h1>  
+        <?php
+            $servername = 'localhost';
+            $username = 'root';
+            $password = '';
+			$dbname = 'vvalucasc';
+            
+            //On établit la connexion
+            $conn = new mysqli($servername, $username, $password,$dbname);
+            
+            //On vérifie la connexion
+            if($conn->connect_error){
+                die('Erreur : ' .$conn->connect_error);
+            }
+            echo 'Connexion réussie';
+        ?>
+		<?php
+		
+		$res = mysqli_query($conn, "SELECT NOACT,CODEANIM,CODEETATACT,DATEACT,HRRDVACT,PRIXACT,HRDEBUTACT,HRFINACT,DATEANNULEACT,NOMRESP,PRENOMRESP FROM ACTIVITE") ;
+		
+
+			
+		?>
+		
+		<table border="2" style="width:100%" cellspacing='5'>
+
+  <tr>
+    <td>NUMERO ACTIVITE</td>
+    <td>CODE ANIMATION</td>
+    <td>CODE ETAT ACTIVITE</td>
+	<td>DATE ACTIVITE</td>
+	<td>HEURE DEBUT ACTIVITE</td>
+	<td>PRIX ACTIVITE</td>
+	<td>HEURE DEBUT ACTIVITE</td>
+	<td>HEURE FIN ACTIVITE</td>
+	<td>DATE ANNULATION ACTIVITE</td>
+	<td>NOM DU RESPONSABLE</td>
+	<td>PRENOM DU RESPONSABLE</td>
+	
+  </tr>
+<?php while ($ligne = mysqli_fetch_array($res)){ ?>
+
+			<tr>
+				<td><?php echo $ligne['NOACT'];?></td>
+				<td><?php echo $ligne['CODEANIM'];?></td>
+				<td><?php echo $ligne['CODEETATACT'];?></td>
+				<td><?php echo $ligne['DATEACT'];?></td>
+				<td><?php echo $ligne['HRRDVACT'];?></td>
+				<td><?php echo $ligne['PRIXACT'];?></td>
+				<td><?php echo $ligne['HRDEBUTACT'];?></td>
+				<td><?php echo $ligne['HRFINACT'];?></td>
+				<td><?php echo $ligne['DATEANNULEACT'];?></td>
+				<td><?php echo $ligne['NOMRESP'];?></td>
+				<td><?php echo $ligne['PRENOMRESP'];?></td>
+			</tr>
+
+		
+<?php } ?>
+				</table>
+		
+				
+   
+		</body>
+	
+</html>
