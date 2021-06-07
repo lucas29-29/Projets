@@ -1,0 +1,75 @@
+	<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+	<title>Connexion</title>
+	<head>
+	<body>
+		<h1>Bases de données MySQL</h1>  
+        <?php
+            $servername = 'localhost';
+            $username = 'root';
+            $password = '';
+			$dbname = 'vvalucasc';
+            
+            //On établit la connexion
+            $conn = new mysqli($servername, $username, $password,$dbname);
+            
+            //On vérifie la connexion
+            if($conn->connect_error){
+                die('Erreur : ' .$conn->connect_error);
+            }
+            echo 'Connexion réussie';
+        ?>
+		<?php
+		
+		$res = mysqli_query($conn, "SELECT CODEANIM,CODETYPEANIM,NOMANIM,DATECREATIONANIM,DATEVALIDITEANIM,DUREEANIM,LIMITEAGE,TARIFANIM,NBREPLACEANIM,DESCRIPTANIM,COMMENTANIM,DIFFICULTEANIM FROM ANIMATION") ;
+		
+
+			
+		?>
+		
+		<table border="2" style="width:100%" cellspacing='5'>
+
+  <tr>
+    <td>CODE ANIMATION</td>
+    <td>CODE TYPE ANIMATION</td>
+    <td>NOM ANIMATION</td>
+	<td>DATE CREATION ANIMATION</td>
+	<td>DATE VALIDATION ANIMATION</td>
+	<td>DUREE ANIMATION</td>
+	<td>LIMITE D'AGE</td>
+	<td>TARIF ANIMATION</td>
+	<td>NOMBRE DE PLACE ANIMATION</td>
+	<td>DESCRIPTION ANIMATION</td>
+	<td>COMMENTAIRE ANIMATION</td>
+	<td>DIFFICULTE ANIMATION</td>
+	
+  </tr>
+<?php while ($ligne = mysqli_fetch_array($res)){ ?>
+
+			<tr>
+				<td><?php echo $ligne['CODEANIM'];?></td>
+				<td><?php echo $ligne['CODETYPEANIM'];?></td>
+				<td><?php echo $ligne['NOMANIM'];?></td>
+				<td><?php echo $ligne['DATECREATIONANIM'];?></td>
+				<td><?php echo $ligne['DATEVALIDITEANIM'];?></td>
+				<td><?php echo $ligne['DUREEANIM'];?></td>
+				<td><?php echo $ligne['LIMITEAGE'];?></td>
+				<td><?php echo $ligne['TARIFANIM'];?></td>
+				<td><?php echo $ligne['NBREPLACEANIM'];?></td>
+				<td><?php echo $ligne['DESCRIPTANIM'];?></td>
+				<td><?php echo $ligne['COMMENTANIM'];?></td>
+				<td><?php echo $ligne['DIFFICULTEANIM'];?></td>
+			</tr>
+
+		
+<?php } ?>
+				</table>
+		
+				
+   
+		</body>
+	
+</html>
