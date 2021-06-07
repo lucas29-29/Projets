@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+	<title>Connexion</title>
+	<head>
+	<body>
+		<h1>Bases de données MySQL</h1>  
+        <?php
+            $servername = 'localhost';
+            $username = 'root';
+            $password = '';
+			$dbname = 'vvalucasc';
+            
+            //On établit la connexion
+            $conn = new mysqli($servername, $username, $password,$dbname);
+            
+            //On vérifie la connexion
+            if($conn->connect_error){
+                die('Erreur : ' .$conn->connect_error);
+            }
+            echo 'Connexion réussie';
+        ?>
+		<?php
+		
+		$res = mysqli_query($conn, "SELECT CODETYPEANIM,NOMTYPEANIM FROM TYPE_ANIM") ;
+		
+
+			
+		?>
+		
+		<table border="2" style="width:100%" cellspacing='5'>
+
+  <tr>
+    <td>CODE TYPE ANIMATION</td>
+    <td>NOM TYPE ANIMATION</td>
+	
+	
+  </tr>
+<?php while ($ligne = mysqli_fetch_array($res)){ ?>
+
+			<tr>
+				<td><?php echo $ligne['CODETYPEANIM'];?></td>
+				<td><?php echo $ligne['NOMTYPEANIM'];?></td>
+				
+			</tr>
+
+		
+<?php } ?>
+				</table>
+		
+				
+   
+		</body>
+	
+</html>
